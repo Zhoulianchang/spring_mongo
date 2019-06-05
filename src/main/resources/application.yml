@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: spring-mongo
+  jackson:
+    time-zone: GMT+8
+  data:
+    mongodb:
+      uri: mongodb://47.99.209.31:27017/test
+server:
+  port: 8080
