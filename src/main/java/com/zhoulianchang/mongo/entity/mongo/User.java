@@ -15,7 +15,6 @@ import java.util.List;
  * @date 2019-06-05 16:18
  **/
 @Data
-@NoArgsConstructor
 @Document(collection = "user")
 public class User implements Serializable {
     @Id
