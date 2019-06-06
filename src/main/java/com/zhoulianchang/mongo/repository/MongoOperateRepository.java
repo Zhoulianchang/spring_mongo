@@ -21,6 +21,14 @@ public interface MongoOperateRepository extends MongoRepository<User, ObjectId> 
     List<User> findByName(String name);
 
     /**
+     * 根据姓名和年龄查询用户
+     * @param name 姓名
+     * @param age 年龄
+     * @return 返回的结果集
+     */
+    List<User> findByNameAndInfo_Age(String name,Integer age);
+
+    /**
      * 根据姓名删除
      * @param name 要删除的姓名
      */
@@ -32,5 +40,4 @@ public interface MongoOperateRepository extends MongoRepository<User, ObjectId> 
      * @return 返回的结果集
      */
     Boolean existsByName(String name);
-
 }

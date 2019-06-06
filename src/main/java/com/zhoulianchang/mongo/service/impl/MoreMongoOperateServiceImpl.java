@@ -30,6 +30,12 @@ public class MoreMongoOperateServiceImpl implements MoreMongoOperateService {
     }
 
     @Override
+    public Result findByNameAndAge(String name, Integer age) {
+        List<User> userLists = mongoOperateRepository.findByNameAndInfo_Age(name, age);
+        return ResultUtils.success(userLists);
+    }
+
+    @Override
     public Result deleteByName(String name) {
         if(mongoOperateRepository.existsByName(name)) {
             mongoOperateRepository.deleteByName(name);

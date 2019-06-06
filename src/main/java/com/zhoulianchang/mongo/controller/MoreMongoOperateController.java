@@ -25,6 +25,12 @@ public class MoreMongoOperateController {
         return mongoOperateService.findByName(name);
     }
 
+    @GetMapping("/user/name/age")
+    public Result findByName(@RequestParam("name") String name,
+                             @RequestParam("age") Integer age) {
+        return mongoOperateService.findByNameAndAge(name,age);
+    }
+
     @DeleteMapping("/user/name")
     public Result deleteByName(@RequestParam("name") String name) {
         return mongoOperateService.deleteByName(name);

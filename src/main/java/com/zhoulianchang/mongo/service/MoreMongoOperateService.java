@@ -16,6 +16,14 @@ public interface MoreMongoOperateService {
     Result findByName(String name);
 
     /**
+     * 根据姓名和年龄一起查询
+     * @param name 姓名
+     * @param age 年龄
+     * @return 返回的结果集
+     */
+    Result findByNameAndAge(String name, Integer age);
+
+    /**
      * 根据姓名进行删除
      * @param name 要删除的姓名
      * @return 返回的结果集
