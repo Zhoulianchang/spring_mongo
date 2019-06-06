@@ -13,6 +13,7 @@ import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.util.List;
 
@@ -32,26 +33,37 @@ public class MongoOperateServiceImpl implements MongoOperateService {
 
     @Override
     public Result findAll() {
+        // 查询所有用户信息(不分页)
         List<User> userList = mongoOperateRepository.findAll();
         return ResultUtils.success(userList);
     }
 
     @Override
     public Result findAll(Pageable pageable) {
+        // 查询所有用户信息(分页)
         Page<User> userPage = mongoOperateRepository.findAll(pageable);
         return ResultUtils.success(userPage);
     }
 
     @Override
     public Result save(User user) {
+        if(StringUtils.isEmpty(user.getId())){
+            return ResultUtils.badRequest("不能指定用户id");
+        }
+        // 插入用户信息 (如果user的id不指定的话)
         User newUser = mongoOperateRepository.save(user);
         return ResultUtils.success(newUser);
     }
 
     @Override
     public Result update(User user) {
-        user = mongoOperateRepository.save(user);
-        return ResultUtils.success(user);
+        if(mongoOperateRepository.existsById(new ObjectId(user.getId()))){
+            // 修改用户信息(如果user的id指定的话且存在的话就是修改)
+            user = mongoOperateRepository.save(user);
+            return ResultUtils.success(user);
+        } else {
+            return ResultUtils.badRequest("该用户id不存在");
+        }
     }
 
     @Override
