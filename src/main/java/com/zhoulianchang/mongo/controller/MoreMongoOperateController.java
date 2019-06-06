@@ -4,10 +4,7 @@ import com.zhoulianchang.mongo.entity.response.Result;
 import com.zhoulianchang.mongo.service.MongoOperateService;
 import com.zhoulianchang.mongo.service.MoreMongoOperateService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author ZLC
@@ -26,5 +23,10 @@ public class MoreMongoOperateController {
     @GetMapping("/user/name")
     public Result findByName(@RequestParam("name") String name) {
         return mongoOperateService.findByName(name);
+    }
+
+    @DeleteMapping("/user/name")
+    public Result deleteByName(@RequestParam("name") String name) {
+        return mongoOperateService.deleteByName(name);
     }
 }

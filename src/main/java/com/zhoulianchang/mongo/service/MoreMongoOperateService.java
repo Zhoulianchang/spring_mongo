@@ -14,4 +14,11 @@ public interface MoreMongoOperateService {
      * @return 返回的结果集
      */
     Result findByName(String name);
+
+    /**
+     * 根据姓名进行删除
+     * @param name 要删除的姓名
+     * @return 返回的结果集
+     */
+    Result deleteByName(String name);
 }

@@ -28,4 +28,14 @@ public class MoreMongoOperateServiceImpl implements MoreMongoOperateService {
         List<User> userList = mongoOperateRepository.findByName(name);
         return ResultUtils.success(userList);
     }
+
+    @Override
+    public Result deleteByName(String name) {
+        if(mongoOperateRepository.existsByName(name)) {
+            mongoOperateRepository.deleteByName(name);
+            return ResultUtils.success();
+        } else {
+            return ResultUtils.failed("用户名不存在");
+        }
+    }
 }

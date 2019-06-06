@@ -48,4 +48,11 @@ public interface MongoOperateService {
      * @return 返回的结果集
      */
     Result delete(String id);
+
+    /**
+     * 判断该用户是否存在
+     * @param id 用户id
+     * @return
+     */
+    Result judgeIsExist(String id);
 }

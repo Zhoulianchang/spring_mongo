@@ -33,4 +33,30 @@ public class ResultUtils {
         result.setData(null);
         return result;
     }
+
+    /**
+     * 用于处理失败结果
+     * @param <T> 泛型
+     * @return 返回结果集
+     */
+    public static <T> Result<T> failed(String message) {
+        Result<T> result = new Result<>();
+        result.setCode(500);
+        result.setMsg(message);
+        result.setData(null);
+        return result;
+    }
+
+    /**
+     * 用于处理失败结果
+     * @param <T> 泛型
+     * @return 返回结果集
+     */
+    public static <T> Result<T> badRequest(String message) {
+        Result<T> result = new Result<>();
+        result.setCode(400);
+        result.setMsg(message);
+        result.setData(null);
+        return result;
+    }
 }

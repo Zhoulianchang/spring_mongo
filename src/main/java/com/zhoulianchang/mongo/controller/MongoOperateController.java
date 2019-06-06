@@ -3,6 +3,8 @@ package com.zhoulianchang.mongo.controller;
 import com.zhoulianchang.mongo.entity.mongo.User;
 import com.zhoulianchang.mongo.entity.response.Result;
 import com.zhoulianchang.mongo.service.MongoOperateService;
+import com.zhoulianchang.mongo.utils.ResultUtils;
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -39,6 +41,16 @@ public class MongoOperateController {
         return mongoOperateService.findAll(PageRequest.of(pageNum, pageSize, Sort.Direction.DESC, "info.age"));
     }
 
+    @GetMapping("/user/exist/{id}")
+    public Result judgeIsExist(@PathVariable String id) {
+        // 对id进行校验防止无效id
+        boolean valid = ObjectId.isValid(id);
+        if(valid){
+            return mongoOperateService.judgeIsExist(id);
+        } else {
+            return ResultUtils.badRequest("输入的id是无效的16进制,[" + id + "]");
+        }
+    }
     @PostMapping("/user")
     public Result save(@RequestBody User user) {
         return mongoOperateService.save(user);

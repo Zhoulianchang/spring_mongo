@@ -19,4 +19,18 @@ public interface MongoOperateRepository extends MongoRepository<User, ObjectId> 
      * @return 返回User对象集合(考虑重名的情况)
      */
     List<User> findByName(String name);
+
+    /**
+     * 根据姓名删除
+     * @param name 要删除的姓名
+     */
+    void deleteByName(String name);
+
+    /**
+     * 判断该姓名是否存在
+     * @param name 要判断的姓名
+     * @return 返回的结果集
+     */
+    Boolean existsByName(String name);
+
 }
