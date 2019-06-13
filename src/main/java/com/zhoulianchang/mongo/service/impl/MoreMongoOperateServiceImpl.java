@@ -1,11 +1,16 @@
 package com.zhoulianchang.mongo.service.impl;
 
+import com.zhoulianchang.mongo.entity.mongo.Test;
 import com.zhoulianchang.mongo.entity.mongo.User;
 import com.zhoulianchang.mongo.entity.response.Result;
 import com.zhoulianchang.mongo.repository.MongoOperateRepository;
 import com.zhoulianchang.mongo.service.MoreMongoOperateService;
 import com.zhoulianchang.mongo.utils.ResultUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.CriteriaDefinition;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,11 +22,13 @@ import java.util.List;
 @Service
 public class MoreMongoOperateServiceImpl implements MoreMongoOperateService {
     private final MongoOperateRepository mongoOperateRepository;
-
+    private final MongoTemplate mongoTemplate;
     @Autowired
-    public MoreMongoOperateServiceImpl(MongoOperateRepository mongoOperateRepository) {
+    public MoreMongoOperateServiceImpl(MongoOperateRepository mongoOperateRepository,MongoTemplate mongoTemplate) {
         this.mongoOperateRepository = mongoOperateRepository;
+        this.mongoTemplate = mongoTemplate;
     }
+
 
     @Override
     public Result findByName(String name) {
@@ -43,5 +50,13 @@ public class MoreMongoOperateServiceImpl implements MoreMongoOperateService {
         } else {
             return ResultUtils.failed("用户名不存在");
         }
+    }
+
+    @Override
+    public Result test(String roomId, String localActor) {
+        localActor = "[" + localActor + "]";
+        Criteria cri = Criteria.where("info.ConfAttr.room_id").is(roomId).and("info.ConfQos.localActor").is(localActor);
+        List<Test> tests = mongoTemplate.find(Query.query(cri), Test.class);
+        return ResultUtils.success(tests);
     }
 }
