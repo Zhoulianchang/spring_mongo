@@ -2,6 +2,8 @@ package com.zhoulianchang.mongo.service;
 
 import com.zhoulianchang.mongo.entity.response.Result;
 
+import javax.servlet.http.HttpServletResponse;
+
 /**
  * @author ZLC
  * @date 2019-06-05 17:52
@@ -37,4 +39,10 @@ public interface MoreMongoOperateService {
      * @return
      */
     Result test(String roomId, String localActor);
+
+    /**
+     * 测试下载
+     * @param response
+     */
+    void download(HttpServletResponse response);
 }

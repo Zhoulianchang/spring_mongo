@@ -6,6 +6,8 @@ import com.zhoulianchang.mongo.service.MoreMongoOperateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
+
 /**
  * @author ZLC
  * @date 2019-06-05 17:50
@@ -39,5 +41,10 @@ public class MoreMongoOperateController {
     @GetMapping("/info")
     public Result test(@RequestParam("roomId") String roomId,@RequestParam("localActor") String localActor) {
         return mongoOperateService.test(roomId,localActor);
+    }
+
+    @GetMapping("/download")
+    public void download(HttpServletResponse response){
+        mongoOperateService.download(response);
     }
 }
