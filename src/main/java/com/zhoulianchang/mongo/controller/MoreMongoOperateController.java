@@ -37,14 +37,4 @@ public class MoreMongoOperateController {
     public Result deleteByName(@RequestParam("name") String name) {
         return mongoOperateService.deleteByName(name);
     }
-
-    @GetMapping("/info")
-    public Result test(@RequestParam("roomId") String roomId,@RequestParam("localActor") String localActor) {
-        return mongoOperateService.test(roomId,localActor);
-    }
-
-    @GetMapping("/download")
-    public void download(HttpServletResponse response){
-        mongoOperateService.download(response);
-    }
 }

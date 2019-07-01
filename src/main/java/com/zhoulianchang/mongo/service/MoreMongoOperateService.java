@@ -31,18 +31,4 @@ public interface MoreMongoOperateService {
      * @return 返回的结果集
      */
     Result deleteByName(String name);
-
-    /**
-     * 测试
-     * @param roomId
-     * @param localActor
-     * @return
-     */
-    Result test(String roomId, String localActor);
-
-    /**
-     * 测试下载
-     * @param response
-     */
-    void download(HttpServletResponse response);
 }

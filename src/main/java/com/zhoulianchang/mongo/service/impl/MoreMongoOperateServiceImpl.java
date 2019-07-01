@@ -57,31 +57,4 @@ public class MoreMongoOperateServiceImpl implements MoreMongoOperateService {
             return ResultUtils.failed("用户名不存在");
         }
     }
-
-    @Override
-    public Result test(String roomId, String localActor) {
-        localActor = "[" + localActor + "]";
-        Criteria cri = Criteria.where("info.ConfAttr.room_id").is(roomId).and("info.ConfQos.localActor").is(localActor);
-        List<Test> tests = mongoTemplate.find(Query.query(cri), Test.class);
-        return ResultUtils.success(tests);
-    }
-
-    @Override
-    public void download(HttpServletResponse response) {
-        try {
-            ZipOutputStream zip = new ZipOutputStream(response.getOutputStream());
-            File file1 = new File("/home/docker/minio/data/test/24C2474E-D18B-4C66-8295-F65CECE9823E.jpeg");
-            File file2 = new File("/home/docker/minio/data/myself/American_id.png");
-            System.out.println("file1 exists :" + file1.exists());
-            System.out.println("file2 exists :" + file2.exists());
-            List<File> list = new ArrayList<>();
-            list.add(file1);
-            list.add(file2);
-            BatchDownloadFile.setResponseHeader(System.currentTimeMillis() + ".zip", response);
-            BatchDownloadFile.batchDownload(zip, list);
-            zip.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 }
